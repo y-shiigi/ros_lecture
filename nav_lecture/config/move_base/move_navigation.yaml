@@ -4,6 +4,7 @@ global_costmap:
     - {name: inflation_layer, type: "costmap_2d::InflationLayer"}
   global_frame: dtw_robot1/map
   robot_base_frame: dtw_robot1/base_link
+  footprint: [[-0.2, -0.12], [-0.2, 0.12], [0.05, 0.12], [0.05, -0.12]]
   update_frequency: 2.0
   publish_frequency: 2.0
   static_layer:
@@ -11,7 +12,8 @@ global_costmap:
     track_unknown_space: false
     subscribe_to_updates: true
   inflation_layer:
-    inflation_radius: 0.25
+    inflation_radius: 0.50
+    cost_scaling_factor: 3.0
 
 local_costmap:
   plugins: 
@@ -40,11 +42,12 @@ local_costmap:
     topics: [ /dtw_robot1/sonar_back/range ]
     clear_on_max_reading: true
   inflation_layer:
-    inflation_radius: 0.05
+    inflation_radius: 0.20
+    cost_scaling_factor: 10.0
 
 local_planner:
   sim_time: 3.0
-  max_vel_x: 0.10
+  max_vel_x: 0.15
   min_vel_x: 0.05
   max_vel_theta: 2.0
   min_in_place_vel_theta: 0.4
@@ -55,4 +58,6 @@ local_planner:
   meter_scoring: true
   controller_frequency: 10.0
   yaw_goal_tolerance: 3.0
+  pdist_scale : 0.6 
+  gdist_scale : 0.2
   occdist_scale: 0.1
