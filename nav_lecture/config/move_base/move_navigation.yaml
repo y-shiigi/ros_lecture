@@ -20,7 +20,7 @@ local_costmap:
     - {name: inflation_layer, type: "costmap_2d::InflationLayer"}
   global_frame: dtw_robot1/odom
   robot_base_frame: dtw_robot1/base_link
-  # footprint: [[-0.2, -0.12], [-0.2, 0.12], [0.05, 0.12], [0.05, -0.12]]
+  footprint: [[-0.2, -0.12], [-0.2, 0.12], [0.05, 0.12], [0.05, -0.12]]
   rolling_window: true
   width: 4.0
   height: 4.0
@@ -40,10 +40,11 @@ local_costmap:
     topics: [ /dtw_robot1/sonar_back/range ]
     clear_on_max_reading: true
   inflation_layer:
-    inflation_radius: 0.15
+    inflation_radius: 0.05
 
-TrajectoryPlannerROS:
-  max_vel_x: 0.1
+local_planner:
+  sim_time: 3.0
+  max_vel_x: 0.10
   min_vel_x: 0.05
   max_vel_theta: 2.0
   min_in_place_vel_theta: 0.4
@@ -53,3 +54,5 @@ TrajectoryPlannerROS:
   holonomic_robot: false
   meter_scoring: true
   controller_frequency: 10.0
+  yaw_goal_tolerance: 3.0
+  occdist_scale: 0.1
